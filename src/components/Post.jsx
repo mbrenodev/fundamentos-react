@@ -9,8 +9,8 @@ export function Post({ author, publishedAt, content }){
   const [comments, setComments] = useState([
     'Post muito bacana, hein?!'
   ])
-  const [newCommentText, setNewCommentText] = useState('')
 
+  const [newCommentText, setNewCommentText] = useState('')
 
   const publishedAtFormatted = format(publishedAt, "d 'do' MMMM 'as' 09:mm'h'", {
     locale: ptBR
@@ -21,7 +21,6 @@ export function Post({ author, publishedAt, content }){
     addSuffix: true
   })
 
-  
   function handleCreateNewComment(){
     event.preventDefault()
     const newCommentText = event.target.comment.value
@@ -33,8 +32,11 @@ export function Post({ author, publishedAt, content }){
     setNewCommentText(event.target.value)
   }
 
-  function deleteComment(comment){
-    console.log(`Delete comentario ${comment}`)
+  function deleteComment(commentToDelete){
+    const commentsWithoutDeletedOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    })
+    setComments(commentsWithoutDeletedOne);
   }
 
   return (
